@@ -1,0 +1,17 @@
+{
+  "name": "verbatim-chat",
+  "version": "0.0.1-beta.0",
+  "description": "chat chat chat",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Ben Rubin",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "compression": "^1.7.0",
+    "cors": "^2.8.4",
+    "dotenv": "^4.0.0"
+  }
+}
