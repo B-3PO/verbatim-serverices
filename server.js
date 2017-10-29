@@ -23,52 +23,18 @@ app.listen(port, () => {
 app.post('/add-item', (req, res) => {
   res.send({
     "messages": [
-    {
-      "attachment":{
-        "type":"template",
-        "payload":{
-          "template_type":"generic",
-          "image_aspect_ratio": "square",
-          "elements":[
-            {
-              "title":"Chatfuel Rockets T-Shirt",
-              "image_url":"https://rockets.chatfuel.com/img/shirt.png",
-              "subtitle":"Soft white cotton t-shirt with CF Rockets logo",
-              "buttons":[
-                {
-                  "type":"web_url",
-                  "url":"https://rockets.chatfuel.com/store/shirt",
-                  "title":"View Item"
-                }
-              ]
-            },
-            {
-              "title":"Chatfuel Rockets Hoodie",
-              "image_url":"https://rockets.chatfuel.com/img/hoodie.png",
-              "subtitle":"Soft grey cotton hoddie with CF Rockets logo",
-              "default_action": {
-                "type": "web_url",
-                "url": "https://rockets.chatfuel.com/store",
-                "messenger_extensions": true
-              },
-              "buttons":[
-                {
-                  "type":"web_url",
-                  "url":"https://rockets.chatfuel.com/store/hoodie",
-                  "title":"View Item"
-                }
-              ]
-            }
-          ]
-        }
+      {
+        "text":  "Did you enjoy the last game of the CF Rockets?",
+        "order_id": 1234
       }
-    }
-  ]
+    ]
   });
 });
 
 
-app.post('/get-cart', {
+
+app.post('/get-cart', (req, res) => {
+  res.send({
    "messages": [
       {
         "attachment":{
@@ -107,3 +73,4 @@ app.post('/get-cart', {
       }
     ]
   });
+});
