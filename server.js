@@ -35,7 +35,7 @@ app.post('/get-user', (req, res) => {
   res.send({ set_attributes: { 'user-token': token } });
 });
 // verify token
-app.use(token.verifty);
+app.use(token.verify);
 
 
 // --- authed ---
