@@ -1,4 +1,4 @@
-// default env vars
+// default env lets
 process.env.TOKEN_EXPIRE_MINUTES = process.env.TOKEN_EXPIRE_MINUTES || 10;
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 require('dotenv').config({path: '.env.example'});
@@ -45,7 +45,7 @@ app.use(tokenService.verify);
 // --- authed ---
 app.post('/user-location', (req, res) => {
   logger.info('user-location: ' + req.token)
-  var body = req.body;
+  let body = req.body;
   let token = tokenService.update({
     section: body.section,
     row: body.row,
@@ -56,8 +56,8 @@ app.post('/user-location', (req, res) => {
 });
 
 app.post('/add-item', (req, res) => {
-  var body = res.body;
-  var cart = req.tokenData.cart || [];
+  let body = res.body;
+  let cart = req.tokenData.cart || [];
   cart.push({
     id: body.item_id,
     quantity: body.item_quantity
@@ -68,7 +68,7 @@ app.post('/add-item', (req, res) => {
 
 
 app.post('/get-cart', (req, res) => {
-  var elements = req.tokenData.map(i  => {
+  let elements = req.tokenData.map(i  => {
     return {
       title: 'Item ' + i.id,
       subtitle: 'quntity: ' + i.quantity,
