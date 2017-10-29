@@ -56,7 +56,9 @@ app.post('/user-location', (req, res) => {
 });
 
 app.post('/add-item', (req, res) => {
+  logger.info('/add-item: ' + JSON.stringify(res.body, null, 2));
   let body = res.body;
+  logger.info('/add-item tokenData: ' + JSON.stringify(req.tokenData, null, 2));
   let cart = req.tokenData.cart || [];
   cart.push({
     id: body.item_id,
