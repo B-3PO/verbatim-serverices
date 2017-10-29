@@ -42,6 +42,7 @@ app.use(tokenService.verify);
 
 // --- authed ---
 app.post('/user-location', (req, res) => {
+  console.log('user-location', req.token)
   var body = res.query;
   tokenService.update({
     section: body.section,
