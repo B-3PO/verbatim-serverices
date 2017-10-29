@@ -21,13 +21,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // -- start server
 app.listen(port, () => {
-  logger.info(`running on port: ${port}`);
+  console.log(`running on port: ${port}`);
 });
 
 // -- non authed ---
 app.post('/get-user', (req, res) => {
   let body = req.body;
-  logger.info('req.body: ' + JSON.stringify(req.body, null, 2));
   let token = tokenService.generate({
     chatfuelUserId: body['chatfuel user id'],
     facebookUserId: body['facebook user id'],
@@ -46,7 +45,7 @@ app.use(tokenService.verify);
 // --- authed ---
 app.post('/user-location', (req, res) => {
   logger.info('user-location: ' + req.token)
-  var body = res.body;
+  var body = req.body;
   tokenService.update({
     section: body.section,
     row: body.row,
