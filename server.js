@@ -46,7 +46,7 @@ app.use(tokenService.verify);
 app.post('/user-location', (req, res) => {
   logger.info('user-location: ' + req.token)
   var body = req.body;
-  tokenService.update({
+  let token = tokenService.update({
     section: body.section,
     row: body.row,
     seat: body.seat
@@ -62,7 +62,7 @@ app.post('/add-item', (req, res) => {
     id: body.item_id,
     quantity: body.item_quantity
   });
-  tokenService.update(req.token, { cart: cart });
+  let token = tokenService.update(req.token, { cart: cart });
   res.send({ set_attributes: { 'user_token': token } });
 });
 
