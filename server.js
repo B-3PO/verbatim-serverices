@@ -29,10 +29,10 @@ app.post('/get-user', (req, res) => {
   let body = req.body;
   logger.info('req.body: ' + JSON.stringify(req.body, null, 2));
   let token = tokenService.generate({
-    chatfuelUserId: body.chatfuel_user_id,
-    facebookUserId: body.facebook_user_id,
-    firstName: body.first_name,
-    lastName: body.last_name,
+    chatfuelUserId: body['chatfuel user id'],
+    facebookUserId: body['facebook user id'],
+    firstName: body['first name'],
+    lastName: body['last name'],
     timezone: body.timezone,
     venueId: body.venueId
   });
