@@ -9,7 +9,7 @@ if (process.env.NODE_ENV === 'development') {
 
 const express = require('express');
 const bodyParser = require('body-parser');
-const token = require('./lib/token');
+const tokenService = require('./lib/token');
 
 const port = process.env.PORT || 5000;
 let app = express();
@@ -24,7 +24,7 @@ app.listen(port, () => {
 // -- non authed ---
 app.post('/get-user', (req, res) => {
   let body = req.body;
-  let token = token.generate({
+  let token = tokenService.generate({
     chatfuelUserId: body.chatfuel_user_id,
     facebookUserId: body.facebook_user_id,
     firstName: body.first_name,
@@ -34,15 +34,16 @@ app.post('/get-user', (req, res) => {
   });
   res.send({ set_attributes: { 'user-token': token } });
 });
+
 // verify token
-app.use(token.verify);
+app.use(tokenService.verify);
 
 
 // --- authed ---
 app.post('/user-location', (req, res) => {
   var body = res.body;
 
-  token.update({
+  tokenService.update({
     section: body.section,
     row: body.row,
     seat: body.seat
@@ -58,7 +59,7 @@ app.post('/add-item', (req, res) => {
     id: body.item_id,
     quantity: body.item_quantity
   });
-  token.update(req.token, { cart: cart });
+  tokenService.update(req.token, { cart: cart });
   res.send({ set_attributes: { 'user-token': token } });
 });
 
