@@ -26,6 +26,7 @@ app.listen(port, () => {
 // -- non authed ---
 app.post('/get-user', (req, res) => {
   let body = req.body;
+  logger.info('req.body', req.body);
   let token = tokenService.generate({
     chatfuelUserId: body.chatfuel_user_id,
     facebookUserId: body.facebook_user_id,
