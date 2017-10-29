@@ -11,6 +11,7 @@ require('dotenv').config({path: '.env.example'});
 const express = require('express');
 const bodyParser = require('body-parser');
 const tokenService = require('./lib/token');
+const logger = require('heroku-logger');
 
 const port = process.env.PORT || 5000;
 let app = express();
@@ -19,7 +20,7 @@ app.use(bodyParser.json());
 
 // -- start server
 app.listen(port, () => {
-  console.log(`running on port: ${port}`);
+  logger.info(`running on port: ${port}`);
 });
 
 // -- non authed ---
@@ -42,7 +43,7 @@ app.use(tokenService.verify);
 
 // --- authed ---
 app.post('/user-location', (req, res) => {
-  console.log('user-location', req.token)
+  logger.info('user-location', req.token)
   var body = res.query;
   tokenService.update({
     section: body.section,
