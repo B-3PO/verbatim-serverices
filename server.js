@@ -33,7 +33,7 @@ app.post('/get-user', (req, res) => {
     timezone: body.timezone,
     venueId: body.venueId
   });
-  res.send({ set_attributes: { 'user-token': token } });
+  res.send({ set_attributes: { 'user_token': token } });
 });
 
 // verify token
@@ -43,6 +43,10 @@ app.use(tokenService.verify);
 // --- authed ---
 app.post('/user-location', (req, res) => {
   var body = res.body;
+  console.log(' ')
+  console.log('-- user-location');
+  console.log('body', body);
+  console.log('query', req.query);
 
   tokenService.update({
     section: body.section,
@@ -50,7 +54,8 @@ app.post('/user-location', (req, res) => {
     seat: body.seat
   }, req.token);
 
-  res.send({ set_attributes: { 'user-token': token } });
+  res.send({ set_attributes: { 'user_token': token } });
+  console.log(' ')
 });
 
 app.post('/add-item', (req, res) => {
@@ -61,7 +66,7 @@ app.post('/add-item', (req, res) => {
     quantity: body.item_quantity
   });
   tokenService.update(req.token, { cart: cart });
-  res.send({ set_attributes: { 'user-token': token } });
+  res.send({ set_attributes: { 'user_token': token } });
 });
 
 
