@@ -25,7 +25,7 @@ app.listen(port, () => {
 
 // -- non authed ---
 app.post('/get-user', (req, res) => {
-  let body = req.query;
+  let body = req.body;
   let token = tokenService.generate({
     chatfuelUserId: body.chatfuel_user_id,
     facebookUserId: body.facebook_user_id,
@@ -44,7 +44,7 @@ app.use(tokenService.verify);
 // --- authed ---
 app.post('/user-location', (req, res) => {
   logger.info('user-location', req.token)
-  var body = res.query;
+  var body = res.body;
   tokenService.update({
     section: body.section,
     row: body.row,
@@ -55,7 +55,7 @@ app.post('/user-location', (req, res) => {
 });
 
 app.post('/add-item', (req, res) => {
-  var body = res.query;
+  var body = res.body;
   var cart = req.tokenData.cart || [];
   cart.push({
     id: body.item_id,
