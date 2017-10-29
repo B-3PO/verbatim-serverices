@@ -1,11 +1,12 @@
 // default env vars
 process.env.TOKEN_EXPIRE_MINUTES = process.env.TOKEN_EXPIRE_MINUTES || 10;
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
-if (process.env.NODE_ENV === 'development') {
-  require('dotenv').config({path: '.env.example'});
-} else {
-  require('dotenv').config();
-}
+require('dotenv').config({path: '.env.example'});
+// if (process.env.NODE_ENV === 'development') {
+//   require('dotenv').config({path: '.env.example'});
+// } else {
+//   require('dotenv').config();
+// }
 
 const express = require('express');
 const bodyParser = require('body-parser');
