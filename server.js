@@ -57,6 +57,8 @@ app.post('/user-location', (req, res) => {
 app.post('/add-item', (req, res) => {
   let body = req.body;
   let cart = req.tokenData.cart || [];
+  logger.info('/get-cart');
+  logger.info('/get-cart tokenData: ' + JSON.stringify(req.tokenData, null, 2));
   cart.push({
     id: body.item_id,
     quantity: body.item_quantity
@@ -67,6 +69,8 @@ app.post('/add-item', (req, res) => {
 
 
 app.post('/get-cart', (req, res) => {
+  logger.info('/get-cart');
+  logger.info('/get-cart tokenData: ' + JSON.stringify(req.tokenData, null, 2));
   let elements = (req.tokenData.cart || []).map(i  => {
     return {
       title: 'Item ' + i.id,
