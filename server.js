@@ -59,7 +59,7 @@ app.post('/add-item', (req, res) => {
   let cart = req.tokenData.cart || [];
   cart.push({
     id: body.item_id,
-    quantity: body.item_quantity
+    quantity: body.item_qty
   });
   let token = tokenService.update({ cart: cart }, req.token);
   res.send({ set_attributes: { 'user_token': token } });
