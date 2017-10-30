@@ -84,7 +84,7 @@ app.post('/get-cart', (req, res) => {
           type: 'template',
           payload: {
             template_type: 'list',
-            top_element_style: 'large',
+            top_element_style: 'compact',
             elements: elements
           }
         }
