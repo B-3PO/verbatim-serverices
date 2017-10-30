@@ -70,6 +70,7 @@ app.post('/add-item', (req, res) => {
 
 
 app.post('/get-cart', (req, res) => {
+  logger.info('/get-cart');
   logger.info('/get-cart tokenData: ' + JSON.stringify(req.tokenData, null, 2));
   let elements = (req.tokenData.cart || []).map(i  => {
     return {
