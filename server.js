@@ -67,29 +67,28 @@ app.post('/add-item', (req, res) => {
 
 
 app.post('/get-cart', (req, res) => {
-  // let elements = (req.tokenData.cart || []).map(i  => {
-  //   return {
-  //     title: 'Item ' + i.id,
-  //     subtitle: 'quntity: ' + i.quantity,
-  //     image_url: '',
-  //     buttons: [],
-  //     default_action: {}
-  //   };
-  // });
+  let elements = (req.tokenData.cart || []).map(i  => {
+    return {
+      title: 'Item ' + i.id,
+      subtitle: 'quntity: ' + i.quantity,
+      image_url: '',
+      buttons: [],
+      default_action: {}
+    };
+  });
 
   res.send({
-   messages: (req.tokenData.cart || []).map(i  => {
-     return {
-       text: 'Item ' + i.id,
-       subtitle: 'Qunatity: ' + i.quantity,
-       buttons: [
-        {
-          "type":"web_url",
-          "url":"https://rockets.chatfuel.com/store/shirt",
-          "title":"Remove Item"
+   messages: [
+      {
+        attachment: {
+          type: 'template',
+          payload: {
+            template_type: 'list',
+            top_element_style: 'compact',
+            elements: elements
+          }
         }
-      ]
-     };
-   })
+      }
+    ]
   });
 });
