@@ -84,7 +84,19 @@ app.post('/get-cart', (req, res) => {
       ]
     };
   });
-
+  logger.info(JSON.stringify({messages: [
+     {
+       attachment: {
+         type: 'template',
+         payload: {
+           template_type: 'list',
+           top_element_style: 'large',
+           elements: elements
+         }
+       }
+     }
+   ]
+ }, null, 2));
   res.send({
    messages: [
       {
