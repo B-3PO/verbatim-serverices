@@ -69,11 +69,15 @@ app.post('/add-item', (req, res) => {
 app.post('/get-cart', (req, res) => {
   let elements = (req.tokenData.cart || []).map(i  => {
     return {
-      title: 'Item ' + i.id,
-      subtitle: 'quntity: ' + i.quantity,
-      image_url: '',
-      buttons: [],
-      default_action: {}
+      title: `Item ${i.id}`,
+      subtitle: `Qunatity ${i.quantity}`,
+      buttons: [
+        {
+          title: 'remove',
+          type: 'web_url',
+          url: ''
+        }
+      ]
     };
   });
 
@@ -85,7 +89,19 @@ app.post('/get-cart', (req, res) => {
           payload: {
             template_type: 'list',
             top_element_style: 'compact',
-            elements: elements
+            elements: [{
+              title: `Cart`,
+              subtitle: `FUCK YOU`,
+              image_url: 'https://pbs.twimg.com/media/B1oGmDKIUAAwV59.jpg',
+              buttons: [
+                {
+                  title: 'BUY',
+                  type: 'web_url',
+                  url: '',
+                  webview_height_ratio: 'tall'
+                }
+              ]
+            }].concat(elements)
           }
         }
       }
