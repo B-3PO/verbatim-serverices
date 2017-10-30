@@ -44,7 +44,6 @@ app.use(tokenService.verify);
 
 // --- authed ---
 app.post('/user-location', (req, res) => {
-  logger.info('user-location: ' + req.token)
   let body = req.body;
   let token = tokenService.update({
     section: body.section,
@@ -56,22 +55,18 @@ app.post('/user-location', (req, res) => {
 });
 
 app.post('/add-item', (req, res) => {
-  logger.info('/add-item: ' + JSON.stringify(res.body, null, 2));
-  let body = res.body;
-  logger.info('/add-item tokenData: ' + JSON.stringify(req.tokenData, null, 2));
+  let body = req.body;
   let cart = req.tokenData.cart || [];
   cart.push({
     id: body.item_id,
     quantity: body.item_quantity
   });
-  let token = tokenService.update(req.token, { cart: cart });
+  let token = tokenService.update({ cart: cart }, req.token);
   res.send({ set_attributes: { 'user_token': token } });
 });
 
 
 app.post('/get-cart', (req, res) => {
-  logger.info('/get-cart');
-  logger.info('/get-cart tokenData: ' + JSON.stringify(req.tokenData, null, 2));
   let elements = (req.tokenData.cart || []).map(i  => {
     return {
       title: 'Item ' + i.id,
